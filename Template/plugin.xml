@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+
+<plugin>
+    <extension point="dreisoft.tresos.launcher2.plugin.module"
+	       id="@MODULE@_@RELEASE_NAME@_ModuleID"
+	       name="@MODULE@_@RELEASE_NAME@_Module">
+	           
+        <module id="@MODULE@_@RELEASE_NAME@" 
+                label="@MODULE@"
+    	        mandatory="@MANDATORY_T@"
+                allowMultiple="false"
+                description="@MODULE@ BSW Module"
+                copyright="@COPYRIGHT@"
+
+                swVersionMajor="@VERSION_MAJOR@"
+                swVersionMinor="@VERSION_MINOR@"
+                swVersionPatch="@VERSION_PATCH@"
+                swVersionSuffix="@RELEASE_TYPE@"
+
+                specVersionMajor=""
+                specVersionMinor=""
+                specVersionPatch=""
+                specVersionSuffix=""
+
+                relVersionPrefix="AUTOSAR"
+                relVersionMajor="@AUTOSAR_RELEASE_VERSION_MAJOR@"
+                relVersionMinor="@AUTOSAR_RELEASE_VERSION_MINOR@"  
+                relVersionPatch="@AUTOSAR_RELEASE_VERSION_PATCH@"
+                relVersionSuffix=""
+
+                categoryType="@MODULE@"
+                categoryLayer="MCAL"
+                categoryCategory="ECU Firmware"
+                categoryComponent="ECUC">
+           <ecuType target="@TARGET_ARCHITECTURE@" derivate="@SILICON_NAME@"/>      
+       </module>	  	           
+   </extension>
+
+   #START_REMOVE_MULTI_INSTANCE#
+   <extension point="dreisoft.tresos.launcher2.plugin.module"
+	       id="@MODULE@_@VENDOR_ID@_@INSTANCE_ID@_@RELEASE_NAME@_ModuleID"
+	       name="@MODULE@_@VENDOR_ID@_@INSTANCE_ID@_@RELEASE_NAME@_Module">
+	           
+        <module id="@MODULE@_@VENDOR_ID@_@INSTANCE_ID@_@RELEASE_NAME@" 
+                label="@MODULE@_@VENDOR_ID@_@INSTANCE_ID@"
+    	        mandatory="false"
+                allowMultiple="false"
+                description="@MODULE@ BSW Module"
+                copyright="@COPYRIGHT@"
+
+                swVersionMajor="@VERSION_MAJOR@"
+                swVersionMinor="@VERSION_MINOR@"
+                swVersionPatch="@VERSION_PATCH@"
+                swVersionSuffix="@RELEASE_TYPE@"
+
+                specVersionMajor=""
+                specVersionMinor=""
+                specVersionPatch=""
+                specVersionSuffix=""
+
+                relVersionPrefix="AUTOSAR"
+                relVersionMajor="@AUTOSAR_RELEASE_VERSION_MAJOR@"
+                relVersionMinor="@AUTOSAR_RELEASE_VERSION_MINOR@"  
+                relVersionPatch="@AUTOSAR_RELEASE_VERSION_PATCH@"
+                relVersionSuffix=""
+
+                categoryType="@MODULE@_@VENDOR_ID@_@INSTANCE_ID@"
+                categoryLayer="MCAL"
+                categoryCategory="ECU Firmware"
+                categoryComponent="ECUC">
+           <ecuType target="@TARGET_ARCHITECTURE@" derivate="@SILICON_NAME@"/>      
+       </module>	  	           
+   </extension>
+   #END_REMOVE_MULTI_INSTANCE#
+
+   <extension point="dreisoft.tresos.launcher2.plugin.configuration"  
+              id="@MODULE@_@RELEASE_NAME@_ConfigID"
+              name="@MODULE@_@RELEASE_NAME@_Configuration">
+        <configuration moduleId="@MODULE@_@RELEASE_NAME@">
+           <schema>
+               <manager class="dreisoft.tresos.autosar2.resourcehandling.AutosarSchemaManager"/>
+               <resource value="config/@MODULE@.xdm" type="xdm"/>
+           </schema>    
+
+           <data>
+               <manager class="dreisoft.tresos.autosar2.resourcehandling.AutosarConfigManager"/>      
+               <schemaNode path="ASPath:/@RELEASE_NAME@/@MODULE@"/>
+           </data>   
+
+           <editor id="@MODULE@_@RELEASE_NAME@_EditorID" 
+                   label="Default"
+                   tooltip="@MODULE@ BSW Module">
+               <class   class="dreisoft.tresos.launcher2.editor.GenericConfigEditor">
+                 <parameter name="schema" value="ASPath:/@RELEASE_NAME@/@MODULE@"/>
+                 <parameter name="title" value="@MODULE@"/>    
+                 <parameter name="noTabs" value="false"/>  
+                 <parameter name="noLinks" value="true"/>         
+                 <parameter name="groupLinks" value="false"/>
+                 <parameter name="groupContainers" value="false"/>
+                 <parameter name="groupTables" value="true"/>
+                 <parameter name="optionalGeneralTab" value="true"/>
+               </class>
+           </editor>   
+       </configuration>
+   </extension>
+
+   #START_REMOVE_MULTI_INSTANCE#
+   <extension point="dreisoft.tresos.launcher2.plugin.configuration"  
+              id="@MODULE@_@VENDOR_ID@_@INSTANCE_ID@_@RELEASE_NAME@_ConfigID"
+              name="@MODULE@_@VENDOR_ID@_@INSTANCE_ID@_@RELEASE_NAME@_Configuration">
+        <configuration moduleId="@MODULE@_@VENDOR_ID@_@INSTANCE_ID@_@RELEASE_NAME@">
+           <schema>
+               <manager class="dreisoft.tresos.autosar2.resourcehandling.AutosarSchemaManager"/>
+               <resource value="config/@MODULE@.xdm" type="xdm"/>
+           </schema>    
+
+           <data>
+               <manager class="dreisoft.tresos.autosar2.resourcehandling.AutosarConfigManager"/>      
+               <schemaNode path="ASPath:/@MODULE@_@VENDOR_ID@_@INSTANCE_ID@_@RELEASE_NAME@/@MODULE@"/>
+           </data>   
+
+           <editor id="@MODULE@_@VENDOR_ID@_@INSTANCE_ID@_@RELEASE_NAME@_EditorID" 
+                   label="Default"
+                   tooltip="@MODULE@ BSW Module">
+               <class   class="dreisoft.tresos.launcher2.editor.GenericConfigEditor">
+                 <parameter name="schema" value="ASPath:/@MODULE@_@VENDOR_ID@_@INSTANCE_ID@_@RELEASE_NAME@/@MODULE@"/>
+                 <parameter name="title" value="@MODULE@"/>    
+                 <parameter name="noTabs" value="false"/>  
+                 <parameter name="noLinks" value="true"/>         
+                 <parameter name="groupLinks" value="false"/>
+                 <parameter name="groupContainers" value="false"/>
+                 <parameter name="groupTables" value="true"/>
+                 <parameter name="optionalGeneralTab" value="true"/>
+               </class>
+           </editor>   
+       </configuration>
+   </extension>
+   #END_REMOVE_MUITL_INSTANSE#
+
+   <extension point="dreisoft.tresos.launcher2.plugin.generator"
+              id="EPCGenerator"
+              name="EPC Generator">
+       <generator   moduleId="@MODULE@_@RELEASE_NAME@"
+                    id="@MODULE@_@RELEASE_NAME@_GeneratorID"
+                    class="dreisoft.tresos.autosar2.generator.EPCFileGenerator">
+
+            <parameter name="variantAware" value="true"/>
+            <parameter name="cfgFilePath" value="output"/>
+            <parameter name="generateAllModules" value="false"/>
+            <parameter name="generateIntoOneFile" value="false"/>
+            <parameter name="contentType" value="asc:@ASC_AUTOSAR_VERSION@"/>
+       </generator>
+   </extension>
+
+   #START_REMOVE_MULTI_INSTANCE#
+   <extension point="dreisoft.tresos.launcher2.plugin.generator"
+              id="EPCGenerator"
+              name="EPC Generator">
+       <generator   moduleId="@MODULE@_@VENDOR_ID@_@INSTANCE_ID@_@RELEASE_NAME@"
+                    id="@MODULE@_@VENDOR_ID@_@INSTANCE_ID@_@RELEASE_NAME@"
+                    class="dreisoft.tresos.autosar2.generator.EPCFileGenerator">
+
+            <parameter name="variantAware" value="true"/>
+            <parameter name="cfgFilePath" value="output"/>
+            <parameter name="generateAllModules" value="false"/>
+            <parameter name="generateIntoOneFile" value="false"/>
+            <parameter name="contentType" value="asc:@ASC_AUTOSAR_VERSION@"/>
+       </generator>
+   </extension>
+   #END_REMOVE_MULTI_INSTANCE#
+
+   <extension point="dreisoft.tresos.generator.api.plugin.generator" id="@MODULE@_@RELEASE_NAME@_NGGeneratorID">
+       <generator   moduleId="@MODULE@_@RELEASE_NAME@"
+                    id="@MODULE@_@RELEASE_NAME@_UniqueNGGeneratorID"
+                    class="dreisoft.tresos.generator.ng.api.NGGenerator"
+                    modules="generate,generate_PC,generate_PB,verify"
+                    step="post">
+            <parameter name="buildfile" value="ant_generator.xml"/>
+            <parameter name="variantAware" value="true"/>
+       </generator>
+   </extension>
+
+   #START_REMOVE_MULTI_INSTANCE#
+   <extension point="dreisoft.tresos.generator.api.plugin.generator" id="@MODULE@_@VENDOR_ID@_@INSTANCE_ID@_@RELEASE_NAME@_NGGeneratorID">
+       <generator   moduleId="@MODULE@_@VENDOR_ID@_@INSTANCE_ID@_@RELEASE_NAME@"
+                    id="@MODULE@_@VENDOR_ID@_@INSTANCE_ID@_@RELEASE_NAME@_UniqueNGGeneratorID"
+                    class="dreisoft.tresos.generator.ng.api.NGGenerator"
+                    modules="generate,generate_PC,generate_PB,verify"
+                    step="post">
+            <parameter name="buildfile" value="ant_generator.xml"/>
+            <parameter name="variantAware" value="true"/>
+       </generator>
+   </extension>
+   #END_REMOVE_MULTI_INSTANCE#
+
+   #START_REMOVE_ECUC_POSTBUILD#
+   <extension point="dreisoft.tresos.autosar2.api.plugin.postbuildSetup"
+               id="autosar2.api.test.postbuildSetup.basic">
+        <configuration
+            activeLoadableRef="ASPath:/@RELEASE_NAME@/@MODULE@/EcucSelectedLoadableVariant/EcucSelectedLoadableRef"
+            activeSelectableRef="ASPath:/@RELEASE_NAME@/@MODULE@/EcucPostBuildVariant/EcucSelectedPostBuildVariantRef"
+            selectableRefs="ASPath:/@RELEASE_NAME@/@MODULE@/EcucPostBuildVariant/EcucPostBuildVariantRef">
+        </configuration>
+   </extension>
+   #END_REMOVE_ECUC_POSTBUILD#
+
+   <extension point="dreisoft.tresos.launcher2.plugin.generator"
+              id="@MODULE@_@RELEASE_NAME@_GeneratorID"
+              name="@MODULE@_@RELEASE_NAME@ Generator">
+       <generator   moduleId="@MODULE@_@RELEASE_NAME@"
+                    class="dreisoft.tresos.autosar2.generator.TemplateBasedCodeGenerator">
+
+            <parameter name="variantAware" value="true"/>
+            <parameter name="template" mode="generate,verify" value="generate,generate_PC,generate_PB"/>
+       </generator>
+   </extension>
+
+   #START_REMOVE_MULTI_INSTANCE#
+    <extension point="dreisoft.tresos.launcher2.plugin.generator"
+                id="@MODULE@_@VENDOR_ID@_@INSTANCE_ID@_@RELEASE_NAME@_GeneratorID"
+                name="@MODULE@_@VENDOR_ID@_@INSTANCE_ID@_@RELEASE_NAME@ Generator">
+        <generator   moduleId="@MODULE@_@VENDOR_ID@_@INSTANCE_ID@_@RELEASE_NAME@"
+                        class="dreisoft.tresos.autosar2.generator.TemplateBasedCodeGenerator">
+
+                <parameter name="variantAware" value="true"/>
+                <parameter name="template" mode="generate,verify" value="generate,generate_PC,generate_PB"/>
+        </generator>
+    </extension>
+   #END_REMOVE_MULTI_INSTANCE#
+
+   #START_REMOVE_RESOURCE_SUPPORT#
+    <extension point="dreisoft.tresos.autosar2.api.plugin.ecuresource">
+        <ecuresouce
+            target="@TARGET_ARCHITECTURE@"
+            derivate="@SILICON_NAME@"
+            moduleId="@MODULE@_@RELEASE_NAME@"
+            file="resources/@RESOURCE_PACKAGE@.properties">
+            <parameter name="subderivative" value="@RESOURCE_PACKAGE@"/>
+        </ecuresouce>
+    </extension>
+
+    <extension point="dreisoft.tresos.autosar2.api.plugin.ecuresourcefinder">
+        <ecuresourcefinder>
+            <finder class="dreisoft.tresos.autosar2.api.ecuresource.DefaultEcuResourceFinder">
+                <parameter name="name" value="subderivative"/>
+                <parameter name="path" value="ASPath:/@RELEASE_NAME@/@MODULE@/ResourceGeneratorContainer/Resource"/>
+            </finder>
+        </ecuresourcefinder>
+    </extension>
+   #END_REMOVE_RESOURCE_SUPPORT#
+
+<extension point="org.eclipse.help.toc">
+    <toc file="anchors.xml" primary="true"/>
+    <toc file="$nl$/@MODULE@/toc.xml" primary="false"/>
+</extension>
+
+</plugin>
